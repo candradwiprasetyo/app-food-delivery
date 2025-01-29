@@ -1,0 +1,35 @@
+.categoryButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.categoryButton {
+  margin-top: 10px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.categoryButtonSelected {
+  background-color: #007bff;
+  color: white;
+}
+
+.foodList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px;
+}
+
+.foodCard {
+  border: 1px solid black;
+  width: 18%;
+  padding: 10px;
+}
+
+.foodImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
