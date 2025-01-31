@@ -1,0 +1,29 @@
+.skeleton {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.skeletonCategory {
+  padding: 20px;
+  border-radius: 8px;
+  gap: 8px;
+  background-color: white;
+}
+
+.skeletonText {
+  width: 100px;
+  height: 20px;
+}

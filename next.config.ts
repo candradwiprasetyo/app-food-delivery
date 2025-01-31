@@ -12,6 +12,9 @@ const nextConfig = {
     }
     return config;
   },
+  images: {
+    domains: ["zen.wego.com"],
+  },
 };
 
 export default nextConfig;

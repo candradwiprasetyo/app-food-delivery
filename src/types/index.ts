@@ -12,4 +12,6 @@ export interface FoodType {
   rating: number;
   minCookTime: number;
   maxCookTime: number;
+  promotion: string;
+  isNew: boolean;
 }
