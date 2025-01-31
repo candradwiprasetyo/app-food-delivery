@@ -4,7 +4,7 @@ import { FoodType } from "@/types";
 import FoodPromotion from "./FoodPromotion";
 import FoodNewLabel from "./FoodNewLabel";
 import Image from "next/image";
-import clsx from "clsx";
+import FoodDetail from "./FoodDetail";
 
 type FoodProps = {
   loading: boolean;
@@ -33,33 +33,9 @@ export default function Food({
               height={200}
             />
             <div className={styles.foodCardDescription}>
+              <div className={styles.foodCardDescriptionOverlay}></div>
               <FoodPromotion promotion={food.promotion} />
-              <div className={styles.foodCardDescriptionTitle}>{food.name}</div>
-              <div className={styles.foodCardDescriptionRestaurant}>
-                {food.restaurant}
-              </div>
-              <div className={styles.foodCardDescriptionDetail}>
-                <div className={styles.foodCardDescriptionRating}>
-                  <i
-                    className={clsx(
-                      "fa-solid fa-star",
-                      styles.foodCardDescriptionStar
-                    )}
-                    aria-hidden="true"
-                  ></i>
-                  {food.rating.toFixed(1)}
-                </div>
-                <span className={styles.foodCardDescriptionCookTime}>
-                  <i
-                    className={clsx(
-                      "fa-solid fa-clock",
-                      styles.foodCardDescriptionClock
-                    )}
-                    aria-hidden="true"
-                  ></i>
-                  {food.minCookTime}-{food.maxCookTime} mins
-                </span>
-              </div>
+              <FoodDetail food={food} />
             </div>
           </div>
         ))

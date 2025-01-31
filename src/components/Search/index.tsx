@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styles from "@/styles/Search.module.css";
 
 type SearchProps = {
@@ -6,9 +7,28 @@ type SearchProps = {
 };
 
 export default function Search({ searchTerm, setSearchTerm }: SearchProps) {
+  const [debouncedTerm, setDebouncedTerm] = useState(searchTerm || "");
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (setSearchTerm) {
+        setSearchTerm(debouncedTerm);
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [debouncedTerm, setSearchTerm]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDebouncedTerm(e.target.value);
+  };
+
+  const clearSearch = () => {
+    setDebouncedTerm("");
     if (setSearchTerm) {
-      setSearchTerm(e.target.value);
+      setSearchTerm("");
     }
   };
 
@@ -17,12 +37,17 @@ export default function Search({ searchTerm, setSearchTerm }: SearchProps) {
       <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
       <input
         type="text"
-        placeholder="Enter food name"
-        value={searchTerm}
+        placeholder="Let’s find some tasty choices"
+        value={debouncedTerm}
         onChange={handleChange}
         className={styles.searchInput}
         aria-label="Search for food"
       />
+      {debouncedTerm && (
+        <div className={styles.searchClear} onClick={clearSearch}>
+          <i className="fa-solid fa-xmark"></i>
+        </div>
+      )}
     </div>
   );
 }
