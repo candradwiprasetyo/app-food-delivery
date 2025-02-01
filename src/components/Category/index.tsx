@@ -39,7 +39,6 @@ export default function Category({
               backgroundColor:
                 selectedCategory === category.id ? categoryColor[index] : "",
             }}
-            aria-pressed={selectedCategory === category.id}
             aria-label={`Filter by ${category.name}`}
             role="listitem"
           >
