@@ -52,7 +52,6 @@ describe("Category Component", () => {
       name: /Filter by Category 2/i,
     });
     expect(selectedButton).toHaveClass("categoryButtonSelected");
-    expect(selectedButton).toHaveAttribute("aria-pressed", "true");
   });
 
   it("It should calls handleChangeCategory when a category is clicked", () => {

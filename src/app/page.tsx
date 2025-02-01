@@ -10,6 +10,7 @@ import Search from "@/components/Search";
 import Category from "@/components/Category";
 import Food from "@/components/Food";
 import DataNotFound from "@/components/DataNotFound";
+import ErrorPage from "@/components/ErrorPage";
 
 export default function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -20,6 +21,7 @@ export default function Home() {
   const chunkSize = 12;
   const [loading, setLoading] = useState<boolean>(true);
   const [categoryLoading, setCategoryLoading] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -32,6 +34,9 @@ export default function Home() {
         setFoods(foodsData);
       } catch (error) {
         console.error(error);
+        setErrorMessage(
+          "Our chef is taking a little break. Refresh the page and let’s get cooking again"
+        );
       } finally {
         setCategoryLoading(false);
         setLoading(false);
@@ -71,6 +76,10 @@ export default function Home() {
       setSelectedCategory(categoryId);
     }
   };
+
+  if (errorMessage) {
+    return <ErrorPage message={errorMessage} />;
+  }
 
   return (
     <div className={styles.container}>

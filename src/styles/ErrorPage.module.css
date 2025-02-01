@@ -1,0 +1,13 @@
+.errorPage {
+  width: auto;
+  text-align: center;
+  font-size: clamp(12px, 2vw, 20px);
+  font-weight: bold;
+  color: #e88383;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 30px;
+}
