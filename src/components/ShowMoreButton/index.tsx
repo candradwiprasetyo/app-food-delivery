@@ -18,10 +18,10 @@ export default function ShowMoreButton({
           <button
             onClick={loadMore}
             className={styles.showMoreButton}
-            disabled={loading}
             aria-label="Load more food items"
+            role="button"
           >
-            {loading ? "Loading..." : "Show More"}
+            Show More
           </button>
         </div>
       )}

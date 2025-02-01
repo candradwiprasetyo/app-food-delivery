@@ -42,9 +42,15 @@ export default function Search({ searchTerm, setSearchTerm }: SearchProps) {
         onChange={handleChange}
         className={styles.searchInput}
         aria-label="Search for food"
+        role="button"
+        data-testid="input-search-food"
       />
       {debouncedTerm && (
-        <div className={styles.searchClear} onClick={clearSearch}>
+        <div
+          className={styles.searchClear}
+          onClick={clearSearch}
+          data-testid="clear-search"
+        >
           <i className="fa-solid fa-xmark"></i>
         </div>
       )}

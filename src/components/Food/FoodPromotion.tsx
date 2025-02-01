@@ -19,7 +19,11 @@ export default function FoodPromotion({ promotion }: FoodPromotionProps) {
         aria-label={`Promotion: ${promotion}`}
       >
         {promotion === "gift" && (
-          <i className="fa-solid fa-gift" aria-hidden="true"></i>
+          <i
+            className="fa-solid fa-gift"
+            aria-hidden="true"
+            data-testid="icon-gift"
+          ></i>
         )}
         {promotion === "discount" && <span>%</span>}
         {promotion === "1+1" && <span>1+1</span>}

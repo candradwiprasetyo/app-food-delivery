@@ -4,7 +4,11 @@ export default function SkeletonCategoryLoading() {
   return (
     <>
       {Array.from({ length: 6 }).map((_, index) => (
-        <div className={stylesCategory.skeletonCategory} key={index}>
+        <div
+          className={stylesCategory.skeletonCategory}
+          key={index}
+          data-testid="skeleton-category-card"
+        >
           <div
             className={`${stylesCategory.skeleton} ${stylesCategory.skeletonIcon}`}
           />

@@ -4,7 +4,11 @@ export default function SkeletonLoading() {
   return (
     <>
       {Array.from({ length: 12 }).map((_, index) => (
-        <div className={styles.skeletonFoodCard} key={index}>
+        <div
+          className={styles.skeletonFoodCard}
+          key={index}
+          data-testid="skeleton-food-card"
+        >
           <div className={`${styles.skeleton} ${styles.skeletonImage}`} />
           <div className={`${styles.skeleton} ${styles.skeletonText}`} />
           <div

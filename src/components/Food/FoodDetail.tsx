@@ -18,8 +18,9 @@ export default function FoodDetail({ food }: FoodDetailProps) {
           <i
             className={clsx("fa-solid fa-star", styles.foodCardDescriptionStar)}
             aria-hidden="true"
+            data-testid="icon-star"
           ></i>
-          {food.rating.toFixed(1)}
+          {food.rating ? food.rating.toFixed(1) : "No Rating"}
         </div>
         <span className={styles.foodCardDescriptionCookTime}>
           <i
@@ -28,6 +29,7 @@ export default function FoodDetail({ food }: FoodDetailProps) {
               styles.foodCardDescriptionClock
             )}
             aria-hidden="true"
+            data-testid="icon-clock"
           ></i>
           {food.minCookTime}-{food.maxCookTime} mins
         </span>

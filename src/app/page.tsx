@@ -22,32 +22,23 @@ export default function Home() {
   const [categoryLoading, setCategoryLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    async function loadCategories() {
+    const loadData = async () => {
       try {
-        const data = await fetchCategories();
-        setCategories(data);
+        const [categoriesData, foodsData] = await Promise.all([
+          fetchCategories(),
+          fetchFoods(),
+        ]);
+        setCategories(categoriesData);
+        setFoods(foodsData);
       } catch (error) {
         console.error(error);
       } finally {
         setCategoryLoading(false);
-      }
-    }
-    loadCategories();
-  }, []);
-
-  useEffect(() => {
-    async function loadFoods() {
-      setLoading(true);
-      try {
-        const data = await fetchFoods();
-        setFoods(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
         setLoading(false);
       }
-    }
-    loadFoods();
+    };
+
+    loadData();
   }, []);
 
   const filteredFoods = useMemo(
@@ -91,7 +82,7 @@ export default function Home() {
         selectedCategory={selectedCategory}
         handleChangeCategory={handleChangeCategory}
       />
-      {filteredFoods.length === 0 && !loading ? (
+      {filteredFoods.length === 0 && !loading && searchTerm.length > 0 ? (
         <DataNotFound />
       ) : (
         <Food
