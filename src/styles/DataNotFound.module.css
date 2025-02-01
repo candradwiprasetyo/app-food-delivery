@@ -8,5 +8,5 @@
   gap: 10px;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  height: calc(100vh - 360px);
 }

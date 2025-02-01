@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { fetchCategories } from "../lib/fetchCategories";
-import { fetchFoods } from "../lib/fetchFoods";
-import { CategoryType, FoodType } from "@/types";
+import { useMemo, useState, useEffect } from "react";
+import { useFetchData } from "@/hooks/useFetchData";
+import { FoodType } from "@/types";
 import styles from "@/styles/Home.module.css";
 import ShowMoreButton from "@/components/ShowMoreButton";
 import Search from "@/components/Search";
@@ -13,39 +12,12 @@ import DataNotFound from "@/components/DataNotFound";
 import ErrorPage from "@/components/ErrorPage";
 
 export default function Home() {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [foods, setFoods] = useState<FoodType[]>([]);
+  const { categories, foods, loading, categoryLoading, errorMessage } =
+    useFetchData();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [displayedFoods, setDisplayedFoods] = useState<FoodType[]>([]);
   const chunkSize = 12;
-  const [loading, setLoading] = useState<boolean>(true);
-  const [categoryLoading, setCategoryLoading] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const [categoriesData, foodsData] = await Promise.all([
-          fetchCategories(),
-          fetchFoods(),
-        ]);
-        setCategories(categoriesData);
-        setFoods(foodsData);
-      } catch (error) {
-        console.error(error);
-        setErrorMessage(
-          "Our chef is taking a little break. Refresh the page and let’s get cooking again"
-        );
-      } finally {
-        setCategoryLoading(false);
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
-
   const filteredFoods = useMemo(
     () =>
       foods.filter(
@@ -77,6 +49,9 @@ export default function Home() {
     }
   };
 
+  const noResultsFound =
+    filteredFoods.length === 0 && !loading && searchTerm.length > 0;
+
   if (errorMessage) {
     return <ErrorPage message={errorMessage} />;
   }
@@ -91,7 +66,7 @@ export default function Home() {
         selectedCategory={selectedCategory}
         handleChangeCategory={handleChangeCategory}
       />
-      {filteredFoods.length === 0 && !loading && searchTerm.length > 0 ? (
+      {noResultsFound ? (
         <DataNotFound />
       ) : (
         <Food
@@ -101,7 +76,7 @@ export default function Home() {
         />
       )}
       {filteredFoods.length > displayedFoods.length && (
-        <ShowMoreButton loading={loading} hasMore={true} loadMore={loadMore} />
+        <ShowMoreButton loading={loading} loadMore={loadMore} />
       )}
     </div>
   );

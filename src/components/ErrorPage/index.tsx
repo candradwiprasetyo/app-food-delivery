@@ -5,5 +5,5 @@ type ErrorPageProps = {
 };
 
 export default function ErrorPage({ message }: ErrorPageProps) {
-  return <div className={styles.errorPage}>{message}</div>;
+  return <p className={styles.errorPage}>{message}</p>;
 }

@@ -13,6 +13,6 @@ describe("DataNotFound Component", () => {
   test("It should renders utensil icon", () => {
     render(<DataNotFound />);
 
-    expect(screen.getByRole("icon")).toBeInTheDocument();
+    expect(screen.getByRole("presentation")).toBeInTheDocument();
   });
 });

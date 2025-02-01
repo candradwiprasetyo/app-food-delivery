@@ -3,6 +3,12 @@ export interface CategoryType {
   name: string;
 }
 
+export enum PromotionType {
+  Gift = "gift",
+  Discount = "discount",
+  OnePlusOne = "1+1",
+}
+
 export interface FoodType {
   id: string;
   name: string;
@@ -12,6 +18,6 @@ export interface FoodType {
   rating: number;
   minCookTime: number;
   maxCookTime: number;
-  promotion: string;
+  promotion: PromotionType | null;
   isNew: boolean;
 }

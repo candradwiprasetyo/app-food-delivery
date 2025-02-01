@@ -1,21 +1,23 @@
 import styles from "@/styles/Food.module.css";
 import clsx from "clsx";
+import { PromotionType } from "@/types";
 
 type FoodPromotionProps = {
-  promotion?: string | null;
+  promotion?: PromotionType | null;
 };
 
 export default function FoodPromotion({ promotion }: FoodPromotionProps) {
+  const promotionClasses = {
+    [styles.foodCardDescriptionPromotion]: true,
+    [styles.foodCardDescriptionPromotionGift]: promotion === "gift",
+    [styles.foodCardDescriptionPromotionDiscount]: promotion === "discount",
+    [styles.foodCardDescriptionPromotion1plus1]: promotion === "1+1",
+  };
+
   return (
     promotion && (
       <div
-        className={clsx(
-          styles.foodCardDescriptionPromotion,
-          promotion === "gift" && styles.foodCardDescriptionPromotionGift,
-          promotion === "discount" &&
-            styles.foodCardDescriptionPromotionDiscount,
-          promotion === "1+1" && styles.foodCardDescriptionPromotion1plus1
-        )}
+        className={clsx(promotionClasses)}
         aria-label={`Promotion: ${promotion}`}
       >
         {promotion === "gift" && (

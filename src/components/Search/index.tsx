@@ -10,10 +10,12 @@ export default function Search({ searchTerm, setSearchTerm }: SearchProps) {
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm || "");
 
   useEffect(() => {
+    setDebouncedTerm(searchTerm || "");
+  }, [searchTerm]);
+
+  useEffect(() => {
     const handler = setTimeout(() => {
-      if (setSearchTerm) {
-        setSearchTerm(debouncedTerm);
-      }
+      setSearchTerm?.(debouncedTerm);
     }, 500);
 
     return () => {
@@ -27,9 +29,7 @@ export default function Search({ searchTerm, setSearchTerm }: SearchProps) {
 
   const clearSearch = () => {
     setDebouncedTerm("");
-    if (setSearchTerm) {
-      setSearchTerm("");
-    }
+    setSearchTerm?.("");
   };
 
   return (
