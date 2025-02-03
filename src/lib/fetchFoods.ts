@@ -1,10 +1,11 @@
-import { FoodType } from "@/types";
+import { FoodType } from "@/types/food";
 
 export async function fetchFoods(): Promise<FoodType[]> {
   try {
-    const response = await fetch(
-      "https://gist.githubusercontent.com/wilson-wego/8311b463cd331099e34a1f251dad4cbf/raw/f1b04f9afe0fcc0c9270cb486b927641b7d27436/food.json"
-    );
+    const apiUrl = process.env.NEXT_PUBLIC_FOOD_API;
+    if (!apiUrl) throw new Error("API URL is not defined");
+
+    const response = await fetch(apiUrl);
     if (!response.ok) throw new Error("Failed to fetch foods");
 
     const data = await response.json();

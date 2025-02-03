@@ -1,6 +1,6 @@
 import styles from "@/styles/Food.module.css";
 import clsx from "clsx";
-import { FoodType } from "@/types";
+import { FoodType } from "@/types/food";
 
 type FoodDetailProps = {
   food: FoodType;

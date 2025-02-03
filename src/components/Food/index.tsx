@@ -1,6 +1,6 @@
 import styles from "@/styles/Food.module.css";
 import SkeletonLoading from "../SkeletonLoading";
-import { FoodType } from "@/types";
+import { FoodType } from "@/types/food";
 import FoodPromotion from "./FoodPromotion";
 import FoodNewLabel from "./FoodNewLabel";
 import Image from "next/image";

@@ -1,6 +1,6 @@
 import styles from "@/styles/Food.module.css";
 import clsx from "clsx";
-import { PromotionType } from "@/types";
+import { PromotionType } from "@/types/promotion";
 
 type FoodPromotionProps = {
   promotion?: PromotionType | null;

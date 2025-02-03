@@ -1,7 +1,9 @@
 import styles from "@/styles/Skeleton.module.css";
 
 export default function SkeletonLoading() {
-  return Array.from({ length: 12 }).map((_, index) => (
+  const chunkSize = parseInt(process.env.NEXT_PUBLIC_CHUNK_SIZE || "12", 10);
+
+  return Array.from({ length: chunkSize }).map((_, index) => (
     <div
       className={styles.skeletonFoodCard}
       key={index}

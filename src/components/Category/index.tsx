@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "@/styles/Category.module.css";
 import SkeletonCategoryLoading from "@/components/SkeletonCategoryLoading";
-import { CategoryType } from "@/types";
+import { CategoryType } from "@/types/category";
 import { categoryColor } from "@/data/categoryColor";
 
 type CategoryProps = {

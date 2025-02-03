@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../lib/fetchCategories";
 import { fetchFoods } from "../lib/fetchFoods";
-import { CategoryType, FoodType } from "@/types";
+import { CategoryType } from "@/types/category";
+import { FoodType } from "@/types/food";
 
 export const useFetchData = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);

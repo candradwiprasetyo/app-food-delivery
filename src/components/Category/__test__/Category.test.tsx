@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Category from "..";
-import { CategoryType } from "@/types";
+import { CategoryType } from "@/types/category";
 
 const mockCategories: CategoryType[] = [
   { id: "1", name: "Category 1" },

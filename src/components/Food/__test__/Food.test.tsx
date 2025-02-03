@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Food from "..";
-import { FoodType } from "@/types";
+import { FoodType } from "@/types/food";
 import "@testing-library/jest-dom";
 
 const mockFood: FoodType = {

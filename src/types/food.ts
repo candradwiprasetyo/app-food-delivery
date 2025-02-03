@@ -1,13 +1,4 @@
-export interface CategoryType {
-  id: string;
-  name: string;
-}
-
-export enum PromotionType {
-  Gift = "gift",
-  Discount = "discount",
-  OnePlusOne = "1+1",
-}
+import { PromotionType } from "./promotion";
 
 export interface FoodType {
   id: string;

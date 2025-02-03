@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { useFetchData } from "@/hooks/useFetchData";
-import { FoodType } from "@/types";
+import { FoodType } from "@/types/food";
 import styles from "@/styles/Home.module.css";
 import ShowMoreButton from "@/components/ShowMoreButton";
 import Search from "@/components/Search";
@@ -17,7 +17,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [displayedFoods, setDisplayedFoods] = useState<FoodType[]>([]);
-  const chunkSize = 12;
+  const chunkSize = parseInt(process.env.NEXT_PUBLIC_CHUNK_SIZE || "12", 10);
   const filteredFoods = useMemo(
     () =>
       foods.filter(
@@ -31,7 +31,7 @@ export default function Home() {
 
   useEffect(() => {
     setDisplayedFoods(filteredFoods.slice(0, chunkSize));
-  }, [filteredFoods]);
+  }, [filteredFoods, chunkSize]);
 
   const loadMore = () => {
     if (!loading && displayedFoods.length < filteredFoods.length) {

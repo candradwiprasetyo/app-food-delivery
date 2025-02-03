@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import FoodDetail from "../FoodDetail";
-import { FoodType } from "@/types";
+import { FoodType } from "@/types/food";
 
 const mockFood: FoodType = {
   id: "1",

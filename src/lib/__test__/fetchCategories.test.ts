@@ -1,14 +1,20 @@
-import { fetchCategories } from "@/lib/fetchCategories";
-import { CategoryType } from "@/types";
+import { fetchCategories } from "../fetchCategories";
+import { CategoryType } from "@/types/category";
 
 global.fetch = jest.fn();
 
 describe("fetchCategories", () => {
+  const API_URL = "https://mock-api.com/categories";
+
+  beforeEach(() => {
+    process.env.NEXT_PUBLIC_CATEGORIES_API = API_URL;
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it("It should fetch categories successfully", async () => {
+  it("should fetch categories successfully", async () => {
     const mockCategories: CategoryType[] = [
       { id: "1", name: "Sushi" },
       { id: "2", name: "Pizza" },
@@ -20,14 +26,19 @@ describe("fetchCategories", () => {
     });
 
     const result = await fetchCategories();
+
     expect(result).toEqual([{ id: "all", name: "All" }, ...mockCategories]);
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(
-      "https://gist.githubusercontent.com/wilson-wego/f7381fcead7a47a7df257a97a033456a/raw/33cd31ce75ba72a809d48944463b53b74b9ccae8/categories.json"
-    );
+    expect(fetch).toHaveBeenCalledWith(API_URL);
   });
 
-  it("It should throw an error when fetch fails", async () => {
+  it("should throw an error when API URL is not defined", async () => {
+    delete process.env.NEXT_PUBLIC_CATEGORIES_API;
+
+    await expect(fetchCategories()).rejects.toThrow("API URL is not defined");
+  });
+
+  it("should throw an error when fetch fails", async () => {
     (fetch as jest.Mock).mockResolvedValue({
       ok: false,
     });
@@ -37,14 +48,14 @@ describe("fetchCategories", () => {
     );
   });
 
-  it("It should handle network errors gracefully", async () => {
+  it("should handle network errors gracefully", async () => {
     (fetch as jest.Mock).mockRejectedValue(new Error("Network error"));
 
     await expect(fetchCategories()).rejects.toThrow("Network error");
   });
 
-  it("It should throw a generic error message for unknown errors", async () => {
-    (fetch as jest.Mock).mockRejectedValue(null); // Simulasi error bukan instance Error
+  it("should throw a generic error message for unknown errors", async () => {
+    (fetch as jest.Mock).mockRejectedValue(null);
 
     await expect(fetchCategories()).rejects.toThrow(
       "An error occurred while retrieving data"
