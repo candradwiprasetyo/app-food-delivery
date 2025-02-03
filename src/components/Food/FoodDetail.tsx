@@ -8,11 +8,15 @@ type FoodDetailProps = {
 
 export default function FoodDetail({ food }: FoodDetailProps) {
   return (
-    <>
+    <article>
       <h3 className={styles.foodCardDescriptionTitle}>{food.name}</h3>
       <p className={styles.foodCardDescriptionRestaurant}>{food.restaurant}</p>
       <div className={styles.foodCardDescriptionDetail}>
-        <div className={styles.foodCardDescriptionRating}>
+        <div
+          className={styles.foodCardDescriptionRating}
+          role="contentinfo"
+          aria-label="Rating"
+        >
           <i
             className={clsx("fa-solid fa-star", styles.foodCardDescriptionStar)}
             aria-hidden="true"
@@ -20,7 +24,11 @@ export default function FoodDetail({ food }: FoodDetailProps) {
           />
           {food.rating?.toFixed(1) ?? "No Rating"}
         </div>
-        <span className={styles.foodCardDescriptionCookTime}>
+        <span
+          className={styles.foodCardDescriptionCookTime}
+          role="contentinfo"
+          aria-label="Cooking Time"
+        >
           <i
             className={clsx(
               "fa-solid fa-clock",
@@ -29,9 +37,11 @@ export default function FoodDetail({ food }: FoodDetailProps) {
             aria-hidden="true"
             data-testid="icon-clock"
           />
-          {food.minCookTime}-{food.maxCookTime} mins
+          {food.minCookTime && food.maxCookTime
+            ? `${food.minCookTime}-${food.maxCookTime} mins`
+            : ""}
         </span>
       </div>
-    </>
+    </article>
   );
 }

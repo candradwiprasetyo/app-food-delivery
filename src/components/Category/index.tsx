@@ -1,8 +1,7 @@
-import Image from "next/image";
 import styles from "@/styles/Category.module.css";
 import SkeletonCategoryLoading from "@/components/SkeletonCategoryLoading";
 import { CategoryType } from "@/types/category";
-import { categoryColor } from "@/data/categoryColor";
+import CategoryButton from "./CategoryButton";
 
 type CategoryProps = {
   categories: CategoryType[];
@@ -23,34 +22,13 @@ export default function Category({
         <SkeletonCategoryLoading />
       ) : (
         categories.map((category, index) => (
-          <button
+          <CategoryButton
             key={category.id}
-            onClick={() => {
-              if (handleChangeCategory) {
-                handleChangeCategory(category.id);
-              }
-            }}
-            className={`${styles.categoryButton} ${
-              selectedCategory === category.id
-                ? styles.categoryButtonSelected
-                : ""
-            }`}
-            style={{
-              backgroundColor:
-                selectedCategory === category.id ? categoryColor[index] : "",
-            }}
-            aria-label={`Filter by ${category.name}`}
-            role="listitem"
-          >
-            {category.name}
-            <Image
-              src={`/assets/images/category-${index}.png`}
-              alt={`Category ${category.name}`}
-              width={80}
-              height={80}
-              className={styles.categoryButtonsImage}
-            />
-          </button>
+            index={index}
+            category={category}
+            isSelected={selectedCategory === category.id}
+            onClick={() => handleChangeCategory?.(category.id)}
+          />
         ))
       )}
     </div>

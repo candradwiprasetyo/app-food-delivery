@@ -17,7 +17,10 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [displayedFoods, setDisplayedFoods] = useState<FoodType[]>([]);
-  const chunkSize = parseInt(process.env.NEXT_PUBLIC_CHUNK_SIZE || "12", 10);
+  const foodsPerPage = parseInt(
+    process.env.NEXT_PUBLIC_FOODS_PER_PAGE || "12",
+    10
+  );
   const filteredFoods = useMemo(
     () =>
       foods.filter(
@@ -30,24 +33,21 @@ export default function Home() {
   );
 
   useEffect(() => {
-    setDisplayedFoods(filteredFoods.slice(0, chunkSize));
-  }, [filteredFoods, chunkSize]);
+    setDisplayedFoods(filteredFoods.slice(0, foodsPerPage));
+  }, [filteredFoods, foodsPerPage]);
 
   const loadMore = () => {
     if (!loading && displayedFoods.length < filteredFoods.length) {
-      const nextChunk = filteredFoods.slice(
+      const nextFoodsPerPage = filteredFoods.slice(
         displayedFoods.length,
-        displayedFoods.length + chunkSize
+        displayedFoods.length + foodsPerPage
       );
-      setDisplayedFoods((prevFoods) => [...prevFoods, ...nextChunk]);
+      setDisplayedFoods((prevFoods) => [...prevFoods, ...nextFoodsPerPage]);
     }
   };
 
-  const handleChangeCategory = (categoryId: string) => {
-    if (selectedCategory !== categoryId) {
-      setSelectedCategory(categoryId);
-    }
-  };
+  const handleChangeCategory = (categoryId: string) =>
+    setSelectedCategory(categoryId);
 
   const noResultsFound =
     filteredFoods.length === 0 && !loading && searchTerm.length > 0;

@@ -5,11 +5,15 @@ type FoodNewLabelProps = {
 };
 
 export default function FoodNewLabel({ isNew }: FoodNewLabelProps) {
+  if (!isNew) return null;
+
   return (
-    isNew && (
-      <div className={styles.foodCardNewBadge} aria-label="New item">
-        New
-      </div>
-    )
+    <div
+      className={styles.foodCardNewBadge}
+      aria-label="New item"
+      role="status"
+    >
+      New
+    </div>
   );
 }

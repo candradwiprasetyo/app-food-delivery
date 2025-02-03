@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Category from "..";
 import { CategoryType } from "@/types/category";
 
@@ -9,7 +10,7 @@ const mockCategories: CategoryType[] = [
 ];
 
 describe("Category Component", () => {
-  it("It should renders loading skeleton when categoryLoading is true", () => {
+  it("It should render loading skeleton when categoryLoading is true", () => {
     render(
       <Category
         categories={mockCategories}
@@ -18,11 +19,11 @@ describe("Category Component", () => {
       />
     );
 
-    const skeletons = screen.queryAllByTestId("skeleton-category-card");
+    const skeletons = screen.getAllByTestId("skeleton-category-card");
     expect(skeletons.length).toBe(6);
   });
 
-  it("It should renders categories when categoryLoading is false", () => {
+  it("It should render category buttons when categoryLoading is false", () => {
     render(
       <Category
         categories={mockCategories}
@@ -39,7 +40,7 @@ describe("Category Component", () => {
     });
   });
 
-  it("It should adds selected class to the selected category", () => {
+  it("It should add selected class to the selected category", () => {
     render(
       <Category
         categories={mockCategories}
@@ -54,8 +55,10 @@ describe("Category Component", () => {
     expect(selectedButton).toHaveClass("categoryButtonSelected");
   });
 
-  it("It should calls handleChangeCategory when a category is clicked", () => {
+  it("It should call handleChangeCategory when a category is clicked", async () => {
+    const user = userEvent.setup();
     const handleChangeCategory = jest.fn();
+
     render(
       <Category
         categories={mockCategories}
@@ -68,8 +71,10 @@ describe("Category Component", () => {
     const categoryButton = screen.getByRole("listitem", {
       name: /Filter by Category 1/i,
     });
-    fireEvent.click(categoryButton);
+
+    await user.click(categoryButton);
 
     expect(handleChangeCategory).toHaveBeenCalledWith("1");
+    expect(handleChangeCategory).toHaveBeenCalledTimes(1);
   });
 });

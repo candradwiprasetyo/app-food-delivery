@@ -1,9 +1,12 @@
 import styles from "@/styles/Skeleton.module.css";
 
 export default function SkeletonLoading() {
-  const chunkSize = parseInt(process.env.NEXT_PUBLIC_CHUNK_SIZE || "12", 10);
+  const foodsPerPage = parseInt(
+    process.env.NEXT_PUBLIC_FOODS_PER_PAGE || "12",
+    10
+  );
 
-  return Array.from({ length: chunkSize }).map((_, index) => (
+  return Array.from({ length: foodsPerPage }).map((_, index) => (
     <div
       className={styles.skeletonFoodCard}
       key={index}
