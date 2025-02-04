@@ -9,5 +9,5 @@ body {
     rgb(243, 244, 243) 50%,
     rgb(220, 229, 255) 100%
   );
-  color: #333;
+  color: var(--default-color);
 }

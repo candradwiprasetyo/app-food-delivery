@@ -3,7 +3,7 @@
   text-align: center;
   font-size: clamp(12px, 2vw, 20px);
   font-weight: bold;
-  color: #e88383;
+  color: var(--secondary-color);
   display: flex;
   gap: 10px;
   justify-content: center;

@@ -27,7 +27,7 @@
 }
 
 .foodCard:hover .foodCardDescriptionTitle {
-  color: #59cf1e;
+  color: var(--primary-color);
 }
 
 .foodCard:hover .foodCardDescriptionPromotion {
@@ -72,7 +72,7 @@
 }
 
 .foodCardNewBadge {
-  background-color: #ff9e25;
+  background-color: var(--new-badge);
   padding: 5px 10px;
   color: white;
   font-weight: bold;
@@ -109,7 +109,7 @@
 }
 
 .foodCardDescriptionTitle {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 10px;
   transition: color 0.3s ease;
@@ -117,11 +117,11 @@
 
 .foodCardDescriptionRestaurant {
   font-size: 14px;
-  color: #999;
+  color: var(--restaurant);
 }
 
 .foodCardDescriptionStar {
-  color: #f0e65f;
+  color: var(--star);
 }
 
 .foodCardDescriptionPromotion {
@@ -139,17 +139,17 @@
 }
 
 .foodCardDescriptionPromotionGift {
-  background-color: #00b1ff;
+  background-color: var(--promotion-gift);
 }
 
 .foodCardDescriptionPromotionDiscount {
-  background-color: #ff696f;
+  background-color: var(--promotion-discount);
   font-weight: bold;
   color: white;
 }
 
 .foodCardDescriptionPromotion1plus1 {
-  background-color: #8f64ff;
+  background-color: var(--promotion-1plus1);
   font-weight: bold;
   color: white;
 }
@@ -177,5 +177,5 @@
 }
 
 .foodCardDescriptionClock {
-  color: #8dd5f4;
+  color: var(--clock);
 }
