@@ -51,4 +51,17 @@ describe("FoodDetail", () => {
     const clockIcon = screen.getByTestId("icon-clock");
     expect(clockIcon).toBeInTheDocument();
   });
+
+  it("It should display 'No Rating' when rating is not available", () => {
+    const foodWithoutRating = { ...mockFood, rating: null };
+    render(<FoodDetail food={foodWithoutRating} />);
+    const rating = screen.getByText(/No Rating/i);
+    expect(rating).toBeInTheDocument();
+  });
+
+  it("It should display rating with one decimal place when rating is available", () => {
+    render(<FoodDetail food={mockFood} />);
+    const rating = screen.getByText(/4.5/i);
+    expect(rating).toBeInTheDocument();
+  });
 });

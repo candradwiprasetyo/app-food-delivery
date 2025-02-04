@@ -39,7 +39,7 @@ describe("Food Component", () => {
         filteredFoods={mockFoods}
       />
     );
-    const foodCard = screen.getByRole("listitem");
+    const foodCard = screen.getByRole("listitemfood");
     expect(foodCard).toBeInTheDocument();
   });
 

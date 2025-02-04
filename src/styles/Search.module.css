@@ -8,6 +8,7 @@
   background-color: white;
   padding: 0 20px;
   color: #54a05f;
+  width: calc(100% - 60px);
 }
 
 .searchInput {

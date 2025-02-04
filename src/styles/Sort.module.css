@@ -1,0 +1,52 @@
+.sortContainer {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #59cf1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sortPopupOverlay {
+  position: fixed;
+  background: black;
+  opacity: 0.8;
+  width: 100%;
+  height: 100vh;
+  inset: 0;
+  z-index: 2;
+}
+
+.sortPopup {
+  position: fixed;
+  width: 300px;
+  height: 295px;
+  inset: 0;
+  margin: auto;
+  background: white;
+  border-radius: 8px;
+  z-index: 3;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.sortPopupList {
+  padding: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selectedSortPopupList {
+  background-color: #59cf1e;
+  color: white;
+}
+
+.sortPopupListIcon {
+  color: white;
+}

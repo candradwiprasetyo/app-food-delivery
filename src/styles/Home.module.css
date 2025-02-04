@@ -1,6 +1,13 @@
 .container {
-  padding: 20px;
   position: relative;
+  margin: 20px auto;
+  padding: 0 clamp(0px, 10vw, 150px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
 }
 
 .containerTitle {
@@ -8,4 +15,10 @@
   text-align: center;
   font-size: clamp(32px, 5vw, 52px);
   margin: 30px 0;
+}
+
+.featureContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }

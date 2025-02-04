@@ -23,7 +23,7 @@ export default function Food({
         <SkeletonLoading />
       ) : (
         filteredFoods.slice(0, displayedFoods.length).map((food) => (
-          <div key={food.id} className={styles.foodCard} role="listitem">
+          <div key={food.id} className={styles.foodCard} role="listitemfood">
             <FoodNewLabel isNew={food.isNew} />
             <Image
               src={food.imageUrl}

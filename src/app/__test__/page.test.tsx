@@ -14,8 +14,30 @@ describe("Home Component", () => {
   ];
 
   const mockFoods = [
-    { id: "1", name: "Sushi Roll", categoryId: "sushi" },
-    { id: "2", name: "Pizza Margherita", categoryId: "pizza" },
+    {
+      id: "1",
+      name: "Sushi Roll",
+      categoryId: "sushi",
+      rating: 4.5,
+      promotion: "gift",
+      isNew: false,
+    },
+    {
+      id: "2",
+      name: "Pizza Margherita",
+      categoryId: "pizza",
+      rating: 4.8,
+      promotion: "discount",
+      isNew: true,
+    },
+    {
+      id: "3",
+      name: "Cheese Burger",
+      categoryId: "burger",
+      rating: 4.2,
+      promotion: "1+1",
+      isNew: false,
+    },
   ];
 
   beforeEach(() => {
@@ -23,7 +45,7 @@ describe("Home Component", () => {
     fetchCategories.mockResolvedValue(mockCategories);
   });
 
-  it("It should render food items after fetching data", async () => {
+  it("should render food items after fetching data", async () => {
     render(<Home />);
     await waitFor(() =>
       expect(screen.getByText("Sushi Roll")).toBeInTheDocument()
@@ -33,7 +55,7 @@ describe("Home Component", () => {
     );
   });
 
-  it("It should filter foods based on selected category", async () => {
+  it("should filter foods based on selected category", async () => {
     render(<Home />);
 
     await waitFor(() => expect(screen.getByText("Sushi")).toBeInTheDocument());
@@ -46,7 +68,69 @@ describe("Home Component", () => {
     });
   });
 
-  it("It should show 'Sorry, no tasty options found, try a different dish.' if no foods match search term", async () => {
+  it("should sort foods by rating", async () => {
+    render(<Home />);
+
+    fireEvent.click(screen.getByTestId("button-sort"));
+    fireEvent.click(screen.getByText("Highest Rating"));
+
+    await waitFor(() => {
+      const foodItems = screen.getAllByRole("listitemfood");
+      expect(foodItems[0]).toHaveTextContent("Pizza Margherita");
+      expect(foodItems[1]).toHaveTextContent("Sushi Roll");
+      expect(foodItems[2]).toHaveTextContent("Cheese Burger");
+    });
+  });
+
+  it("should sort foods by promo gift", async () => {
+    render(<Home />);
+
+    fireEvent.click(screen.getByTestId("button-sort"));
+    fireEvent.click(screen.getByText("Promo Gift"));
+
+    await waitFor(() => {
+      const foodItems = screen.getAllByRole("listitemfood");
+      expect(foodItems[0]).toHaveTextContent("Sushi Roll");
+    });
+  });
+
+  it("should sort foods by promo 1+1", async () => {
+    render(<Home />);
+
+    fireEvent.click(screen.getByTestId("button-sort"));
+    fireEvent.click(screen.getByText("Promo 1+1"));
+
+    await waitFor(() => {
+      const foodItems = screen.getAllByRole("listitemfood");
+      expect(foodItems[0]).toHaveTextContent("Cheese Burger");
+    });
+  });
+
+  it("should sort foods by promo discount", async () => {
+    render(<Home />);
+
+    fireEvent.click(screen.getByTestId("button-sort"));
+    fireEvent.click(screen.getByText("Promo Discount"));
+
+    await waitFor(() => {
+      const foodItems = screen.getAllByRole("listitemfood");
+      expect(foodItems[0]).toHaveTextContent("Pizza Margherita");
+    });
+  });
+
+  it("should sort foods by new menu", async () => {
+    render(<Home />);
+
+    fireEvent.click(screen.getByTestId("button-sort"));
+    fireEvent.click(screen.getByText("New Menu"));
+
+    await waitFor(() => {
+      const foodItems = screen.getAllByRole("listitemfood");
+      expect(foodItems[0]).toHaveTextContent("Pizza Margherita");
+    });
+  });
+
+  it("should show 'Sorry, no tasty options found, try a different dish.' if no foods match search term", async () => {
     render(<Home />);
 
     await waitFor(() => expect(screen.getByText("Sushi")).toBeInTheDocument());
@@ -62,7 +146,7 @@ describe("Home Component", () => {
     );
   });
 
-  it("It should display error message when fetching data fails", async () => {
+  it("should display error message when fetching data fails", async () => {
     fetchFoods.mockRejectedValue(new Error("Failed to fetch foods"));
     fetchCategories.mockRejectedValue(new Error("Failed to fetch categories"));
 
@@ -77,11 +161,14 @@ describe("Home Component", () => {
     });
   });
 
-  it("It should load more foods when 'Load More' button is clicked", async () => {
+  it("should load more foods when 'Show More' button is clicked", async () => {
     const mockFoodsLarge = Array.from({ length: 20 }, (_, i) => ({
       id: `${i + 1}`,
       name: `Food ${i + 1}`,
       categoryId: "all",
+      rating: 4.5,
+      promotion: "gift",
+      isNew: false,
     }));
 
     fetchFoods.mockResolvedValue(mockFoodsLarge);
